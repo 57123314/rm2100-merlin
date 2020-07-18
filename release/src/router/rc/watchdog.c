@@ -2407,6 +2407,19 @@ static void handle_eject_usb_button(void)
 static inline void handle_eject_usb_button(void) { }
 #endif	/* RTCONFIG_EJUSB_BTN && RTCONFIG_BLINK_LED */
 
+void led_on_off(void)
+{
+	if (nvram_match("led_on_off", "1")) {
+		led_control(LED_POWER, LED_ON);
+		led_control(LED_WAN, LED_ON);
+		led_control(LED_ALL, LED_ON);
+	}else{
+		led_control(LED_POWER, LED_OFF);
+		led_control(LED_WAN, LED_OFF);
+		led_control(LED_ALL, LED_OFF);
+	}
+}
+
 void btn_check(void)
 {
 #ifdef RTCONFIG_WIFI_SON
@@ -2826,7 +2839,7 @@ void btn_check(void)
 			if (LED_status_on) {
 				TRACE_PT("LED turn to normal\n");
 				led_control(LED_POWER, LED_ON);
-#if defined(RTAC65U) || defined(RTAC85U) || defined(RTAC85P) || defined(RTN800HP) || defined(RTACRH26)
+#if defined(RTAC65U) || defined(RTAC85U) || defined(RTAC85P) || defined(RTN800HP) || defined(RTACRH26) || defined(RTRM2100)
 			if (nvram_match("wl0_radio", "1")) {
 				led_control(LED_2G, LED_ON);
 			}
@@ -6899,6 +6912,9 @@ void watchdog(int sig)
 #endif
 	/* handle button */
 	btn_check();
+
+	/* handle led */
+	led_on_off();
 
 	if (nvram_match("asus_mfg", "0")
 #if defined(RTCONFIG_LED_BTN) || defined(RTCONFIG_WPS_ALLLED_BTN)

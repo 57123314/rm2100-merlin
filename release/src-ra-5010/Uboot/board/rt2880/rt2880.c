@@ -193,6 +193,8 @@ const char *model =
 	"RT-AC85U";
 #elif defined(CONFIG_RTAC85P)
 	"RT-AC85P";
+#elif defined(CONFIG_RTRM2100)
+	"RT-RM2100";
 #elif defined(CONFIG_RTACRH26)
 	"RT-ACRH26";
 #elif defined(CONFIG_RTN800HP)

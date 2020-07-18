@@ -8,6 +8,10 @@ config  MODEL_RTAC85P
 	bool "RT-AC85P"
 	default n
 
+config  MODEL_RTRM2100
+	bool "RT-RM2100"
+	default n
+
 config  MODEL_RTACRH26
 	bool "RT-ACRH26"
 	default n

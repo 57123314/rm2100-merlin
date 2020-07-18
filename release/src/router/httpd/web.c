@@ -10149,7 +10149,7 @@ static void
 prepare_restore(webs_t wp){
 	int offset = 10;
 #ifdef RTCONFIG_RALINK
-	if (get_model() == MODEL_RTN65U || get_model() == MODEL_RTAC85U || get_model() == MODEL_RTAC85P || get_model() == MODEL_RTACRH26 )
+	if (get_model() == MODEL_RTN65U || get_model() == MODEL_RTAC85U || get_model() == MODEL_RTAC85P || get_model() == MODEL_RTACRH26 || get_model() == MODEL_RTRM2100 )
 		offset = 15;
 #endif
 
@@ -11800,7 +11800,7 @@ do_upgrade_post(char *url, FILE *stream, int len, char *boundary)
 		} else _dprintf("could not retrieve firmware information!\n");
 	}
 #endif
-#if defined(RTAC85P)
+#if defined(RTAC85P) || defined(RTRM2100)
 	upgrade_err=0;//bug?or prebuild file dose not work for ac85p?this is bad way,but check_imagefile always return 1(crc error or header error)
 #else
 	upgrade_err = check_imagefile(upload_fifo);

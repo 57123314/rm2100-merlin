@@ -67,8 +67,6 @@ function init() {
 function applyRule() {
 if(document.getElementById("usb_disk_id").value==0)
 {
-alert("无法启用，请插入U盘或移动硬盘");
-return;
 }
 document.form.submit();
 }

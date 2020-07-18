@@ -4,7 +4,6 @@
 SPACE_AVAL=$(df|grep jffs | awk '{print $2}')
 MODEL=`nvram get productid`
 
-if [ $SPACE_AVAL -gt 51200 -a "$(nvram get sc_mount)" == 0 ];then
 if [ ! -d /jffs/softcenter ]; then
 	mkdir -p /jffs/softcenter
 	cp -rf /rom/etc/softcenter/* /jffs/softcenter/
@@ -19,44 +18,8 @@ mkdir -p /jffs/softcenter/ss
 mkdir -p /jffs/softcenter/lib
 mkdir -p /jffs/configs/dnsmasq.d
 mkdir -p /jffs/softcenter/configs
-else
-if [ "$(nvram get sc_mount)" == 1 ];then
-	mdisk=`nvram get sc_disk`
-	usb_disk="/tmp/mnt/$mdisk"
-	if [ "$MODEL" == "BLUECAVE" ];then
-		[ -n "$(mount |grep $usb_disk |grep tfat)" ] && logger "Unsupport TFAT!" && exit 1
-	fi
-	if [ ! -e "$usb_disk" ]; then
-		nvram set sc_mount="0"
-		nvram commit
-		logger "USB flash drive not detected!/没有找到可用的USB磁盘!" 
-		exit 1
-	else
-		if [ ! -f "/jffs/softcenter/webs/Main_Soft_center.asp" ] ;then
-			mkdir -p /jffs/softcenter
-			mkdir -p $usb_disk/bin
-			mkdir -p $usb_disk/res
-			mkdir -p $usb_disk/webs
-			mkdir -p $usb_disk/scripts
-			mkdir -p $usb_disk/lib
-			mkdir -p /jffs/softcenter/etc
-			mkdir -p /jffs/softcenter/init.d
-			mkdir -p /jffs/softcenter/configs
-			mkdir -p /jffs/softcenter/ss
-			mkdir -p /jffs/softcenter/perp
-			ln -sf $usb_disk/bin /jffs/softcenter/bin
-			ln -sf $usb_disk/res /jffs/softcenter/res
-			ln -sf $usb_disk/webs /jffs/softcenter/webs
-			ln -sf $usb_disk/scripts /jffs/softcenter/scripts
-			ln -sf $usb_disk/lib /jffs/softcenter/lib
-		fi
-	fi
-else
-	logger "Not enough free space for JFFS!/当前jffs分区剩余空间不足!"
-	logger "Exit!/退出安装!"
-	exit 1
-fi
-fi
+
+
 cp -rf /rom/etc/softcenter/scripts/* /jffs/softcenter/scripts/
 cp -rf /rom/etc/softcenter/res/* /jffs/softcenter/res/
 cp -rf /rom/etc/softcenter/webs/* /jffs/softcenter/webs/

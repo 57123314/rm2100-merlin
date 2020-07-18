@@ -106,7 +106,7 @@
 #define LAN_LED		14	/* JTDI */
 #define WPS_LED		12	/* RXD2 */
 
-#elif defined(ASUS_RTAC85P) || defined(ASUS_RTACRH26)
+#elif defined(ASUS_RTAC85P) || defined(ASUS_RTACRH26) || defined(ASUS_RTRM2100)
 #define RST_BTN		3	/* JTCLK */
 #define WPS_BTN		6	/* WDT_RST_N */
 #define PWR_LED		4	/* CTS3_N */

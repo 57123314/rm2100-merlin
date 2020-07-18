@@ -436,7 +436,7 @@ function softceterInitData(data) {
 	var remoteData = data;
 	$("#spnOnlineVersion").html(remoteData.version);
 	if (remoteData.version != db_softcenter_["softcenter_version"]) {
-		$("#updateBtn").show();
+		$("#updateBtn").hide();
 		$("#updateBtn").click(function() {
 			var moduleInfo = {
 				"name": "softcenter",
@@ -629,10 +629,10 @@ function menu_hook(title, tab) {
 }
 function notice_show(){
 	if (typeof modelname != "undefined"){
-	$("#modelid").html("Software Center " + modelname );
+	$("#modelid").html("Software Center " );
 	}
 	else {
-	$("#modelid").html("Software Center " + model );
+	$("#modelid").html("Software Center " );
 	}
 	var pushurl = 'https://sc.paldier.com/' + scarch + '/softcenter/push_message.json.js';
 	$.ajax({
@@ -706,10 +706,6 @@ function notice_show(){
 																					</li>
 																					<li id="push_content4_li" style="margin-top:-5px;display: none;">
 																						<h4 id="push_content4"></h4>
-																					</li>
-																					<li style="margin-top:-5px;">
-																						<h5>当前版本：<span id="spnCurrVersion"></span> 在线版本：<span id="spnOnlineVersion"></span>
-																						<input type="button" id="updateBtn" value="更新" style="display:none" /></h5>
 																					</li>
 																				</ul>
 																			</td>
